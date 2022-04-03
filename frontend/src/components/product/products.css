@@ -1,0 +1,136 @@
+.products_heading{
+    text-align: center;
+    margin: 2vmax auto;
+    margin-bottom: 4vmax;
+    border-bottom: 1px solid grey;
+    width: 15vmax;
+    padding:2vmax;
+    color: rgba(0,0,0,0.678);
+    font: 500 1.5vmax "roboto"
+}
+
+.Products{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5vmax;
+    margin:4vmax;
+    justify-content: flex-end;
+    min-height: 20vmax;
+    
+}
+
+.pagination_box{
+    display: flex;
+    justify-content: center;
+    margin: 6vmax;
+
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    padding:0;
+
+}
+
+.page-item {
+    list-style: none;
+    background-color: white;
+    border:1px solid rgba(0,0,0,0.178);
+    padding:1vmax 1.5vmax;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.page-item:first-child{
+    border-radius: 5px 0 0 5px;
+}
+
+.page-item:last-child{
+    border-radius: 0 5px  5px 0;
+}
+.page-link{
+    text-decoration: none;
+    color: rgb(80,80,80);
+    font: 300 1vmax "roboto";
+    transition: all 0.5s;
+    
+}
+
+.page-item:hover{
+    background-color: rgb(230,230,230)
+}
+
+.page-link :hover .page-item{
+    color: rgb(80,80,80)
+}
+
+.pageItemActive{
+    background-color: tomato
+}
+
+.PageLinkActive{
+    color:white
+}
+
+.filterBox{
+    position: absolute;
+    width: 16vmax;
+    top: 12vmax;
+    left:4vmax;
+    
+    /* z-index: 100; */
+}
+
+.categoryBox {
+    padding: 0%;
+   
+  }
+
+
+.category_link {
+    list-style: none;
+    color: #0000009c;
+    font: 400 1.2vmax "Roboto";
+    margin: 0.4vmax;
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+
+  .category_link:hover {
+    color: tomato;
+  }
+
+
+
+  .filterBox >fieldset{
+      border: 1px solid rgba(0,0,0,0.329);
+  }
+
+
+@media screen and (max-width:600px){
+    .filterBox{
+        position: static;
+        margin:auto;
+        width: 30vmax
+       
+    }
+    .page-link{
+        font: 300 1.5vmax "roboto";
+    }
+
+    
+      .category_link {
+        font: 400 1.8vmax "Roboto";
+      }
+
+      .Products{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.5vmax;
+        margin:4vmax;
+        justify-content: center;
+        
+    }
+    
+}

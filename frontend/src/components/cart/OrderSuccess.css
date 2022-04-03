@@ -1,0 +1,46 @@
+.orderSuccess{
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+.orderSuccess >svg {
+    font-size: 7vmax;
+    color: tomato
+}
+
+.orderSuccess >p{
+    font-size: 2vmax;
+
+
+}
+
+.orderSuccess >a {
+    background-color: rgb(51,51,51);
+    color: white;
+    margin: 3vmax;
+    font : 400 1.3vmax "Georgia";
+    text-decoration: none;
+    margin: 1vmax;
+    cursor: pointer;
+    padding: 1vmax 2.5vmax;
+}
+
+@media screen and (max-width:600) {
+    .orderSuccess>a{
+        padding: 3vw 6vw;
+        font:400 4w "Roboto";
+        margin: 2vmax
+    }
+
+    .orderSuccess>svg{
+        font-size: 20vw;
+    }
+    .orderSuccess>p{
+        margin: 2vmax;
+        font-size: 5vw;
+    }
+}

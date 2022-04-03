@@ -1,0 +1,67 @@
+.CartItem{
+    display:flex;
+    padding: 1vmax;
+    height: 10.7vmax;
+    /* border: 1px solid red; */
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.CartItem_image{
+    /* width: 9vmax; */
+    height:12vmax
+}
+
+.CartItem>div{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    height:10vmax;
+}
+
+.CartItem>div >a{
+  margin-top: 1.5vmax;
+    font :400 1.3vmax cursive;
+    color: rgba(24,24,23,0.825);
+    text-decoration: none;
+}
+
+.CartItem>div > span{
+    font :400 1.3vmax "Roboto";
+    /* color: rgba(24,24,23,0.825); */
+}
+
+.CartItem>div > p{
+    color:tomato;
+    cursor: pointer;
+    font: 400 1.3vmax "roboro";
+    margin-top: 2.4vmax
+}
+
+@media screen and (max-width: 600px) {
+    .CartItem {
+      padding: 3vmax;
+      height: 25vmax;
+    }
+    .CartItem_image {
+      width: 10vmax;
+      height:12vmax;
+    }
+  
+    .CartItem > div {
+      margin: 1vmax 2vmax;
+    }
+  
+    .CartItem > div > a {
+      font: 500 2vmax cursive;
+    }
+  
+    .CartItem > div > span {
+      font: 500 1.9vmax "Roboto";
+    }
+  
+    .CartItem> div > p {
+      font: 300 1.8vmax "Roboto";
+      margin:auto
+    }
+  }
