@@ -4,7 +4,6 @@ const errorMiddleware=(err, req, res, next) => {
     const statusCode= err.statusCode|| 500;
     const message= err.message || "Internal server code"
 
-    console.log("my err",err.name, "and" , err.path)
     //wrong Mongodb id error--> cast error
     if (err.name==='CastError'){
         const message= `Resouces not found, Invalid: ${err.path}`

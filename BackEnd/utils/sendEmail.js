@@ -8,13 +8,13 @@ const sendEmail = async (Options) =>{
         port: 465,     //process.env.SMTP_PORT
         service:"gmail",  //process.env.SMTP_SERVICE  simple mail transfer protocol
         auth:{
-            user:"cricdiariesofficial@gmail.com",       //process.env.SMTP_EMAIL
-            pass:"San@1234"   // process.env.SMPT_PASSWORD
+            user:process.env.SMTP_EMAIL ,
+            pass: process.env.SMPT_PASSWORD
         }
     })
 
     const mailOptions= {
-        from :"cricdiariesofficial@gmail.com",
+        from :process.env.SMTP_EMAIL,
         to : Options.email,
         subject: Options.subject,
         text: Options.message

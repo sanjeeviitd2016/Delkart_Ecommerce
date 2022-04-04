@@ -18,7 +18,7 @@ class ApiFeature {
     }
     filter() {
         const querycopy = { ...this.querystr };
-        console.log("query1",querycopy)
+        // console.log("query1",querycopy)
         const removeFields = ["keyword", "page", "limit"];
         removeFields.forEach((key) => {
             delete querycopy[key];
@@ -26,10 +26,10 @@ class ApiFeature {
 
         //for price filter---->
         let querystring = JSON.stringify(querycopy);
-        console.log("query",querystring)
+        // console.log("query",querystring)
         querystring = querystring.replace(
             /\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`);
-        console.log("qu",this.query)
+        // console.log("qu",this.query)
         this.query = this.query.find(JSON.parse(querystring));
         // console.log(querystring)
         return this;

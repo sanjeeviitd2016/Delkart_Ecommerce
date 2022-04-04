@@ -2,11 +2,11 @@
   "name": "apps",
   "version": "1.0.0",
   "description": "",
-  "main": "Backend/server.js",
+  "main": "BackEnd/server.js",                                                                 
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    
-    "start": "node Backend/server.js"
+    "start": "node BackEnd/Server.js",
+    "dev": " nodemon BackEnd/server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Sanjeev",
   "license": "ISC",

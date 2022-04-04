@@ -9,7 +9,6 @@ const users= require("../models/userModel.js")
 
 const isAuthenticatedUser= catchAsyncError( async(req,res,next)=>{
     const {token}= req.cookies;
-    console.log("cookie",token);
 
     if(!token){
         return  next( new ErrorHandler("Please Login to access",400))
@@ -17,8 +16,6 @@ const isAuthenticatedUser= catchAsyncError( async(req,res,next)=>{
     const privateKey= process.env.PRIVATE_KEY_TOKEN 
     const decodedData= jwt.verify(token,privateKey);
      req.user= await users.findById(decodedData.id)
-    // console.log(decodedData)
-    console.log("user",req.user)
     next()
 })
 

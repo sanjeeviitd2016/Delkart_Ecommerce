@@ -4,17 +4,17 @@ const users = require("../models/userModel");
 const sendToken = require("../utils/jwtToken.js");
 const sendEmail = require("../utils/sendEmail.js");
 const crypto = require("crypto");
-const cloudinary = require('cloudinary')
+const cloudinary = require("cloudinary");
 
 //register a user-->
 
 const registerUser = catchAsyncError(async (req, res, next) => {
   // console.log("register", req.cookies);
-  const mycloud= await cloudinary.v2.uploader.upload(req.body.avatar,{
-    folder:"avatars",
-    width:150,
-    crop: "scale"
-  })
+  const mycloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
   const { name, email, password } = req.body;
 
   const user = await users.create({
@@ -23,7 +23,7 @@ const registerUser = catchAsyncError(async (req, res, next) => {
     password,
     avatar: {
       public_id: mycloud.public_id,
-      url:mycloud.secure_url,
+      url: mycloud.secure_url,
     },
   });
 
@@ -68,7 +68,6 @@ const logoutUser = catchAsyncError((req, res, next) => {
 //forgot password
 const forgotPassword = catchAsyncError(async (req, res, next) => {
   const user = await users.findOne({ email: req.body.email });
-  console.log(user);
   if (!user) {
     return next(new errorHandler("user not recognised", 404));
   }
@@ -76,11 +75,12 @@ const forgotPassword = catchAsyncError(async (req, res, next) => {
   const resetToken = user.getResetPasswordToken();
   await user.save({ validateBeforeSave: false });
 
-  // const resetPasswordUrl = `${req.protocol}://${req.get(
-  //   "host"
-  // )}/password/reset/${resetToken}`;
-  const HostUrl= process.env.FRONTEND_URL; 
-  const resetPasswordUrl= `${HostUrl}/password/reset/${resetToken}` 
+
+  // const HostUrl= process.env.FRONTEND_URL;
+  const resetPasswordUrl = `${req.protocol}://${req.get(
+    "host"
+  )}/password/reset/${resetToken}`;
+
   const message = `Your password  reset token is :- \n\n ${resetPasswordUrl}\n\n if you have not requested this email, please ignore`;
 
   try {
@@ -121,8 +121,6 @@ const resetPassword = catchAsyncError(async (req, res, next) => {
       )
     );
   }
-
-
 
   if (req.body.Password !== req.body.confirmPassword) {
     // console.log("chalo",req.body.Password,req.body.confirmPassword)
@@ -169,19 +167,19 @@ const updateProfile = catchAsyncError(async (req, res, next) => {
   };
   // will add cloudinary later
   // console.log("avatars",req.body.avatar) // undefined not "" this of no input
-  if (req.body.avatar !== "undefined"){
-    const user= await users.findById(req.user.id)
-    const imageId= user.avatar.public_id
+  if (req.body.avatar !== "undefined") {
+    const user = await users.findById(req.user.id);
+    const imageId = user.avatar.public_id;
     await cloudinary.v2.uploader.destroy(imageId);
-    const mycloud= await cloudinary.v2.uploader.upload(req.body.avatar,{
-      folder:"avatars",
-      width:150,
-      crop: "scale"
+    const mycloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
     });
-    newUserDetails.avatar= {
-      public_id: mycloud.public_id, 
-      url: mycloud.secure_url
-    }
+    newUserDetails.avatar = {
+      public_id: mycloud.public_id,
+      url: mycloud.secure_url,
+    };
   }
 
   const user = await users.findByIdAndUpdate(req.user.id, newUserDetails, {
@@ -193,7 +191,7 @@ const updateProfile = catchAsyncError(async (req, res, next) => {
   await user.save();
   res
     .status(200)
-    .json({ success: true, message: "Profile updated successfuly",user });
+    .json({ success: true, message: "Profile updated successfuly", user });
 });
 
 // admin wants to access all users
@@ -205,7 +203,7 @@ const getAllUsers = catchAsyncError(async (req, res, next) => {
 
 // admin wants deatils of his user
 const SingleUserDetails = catchAsyncError(async (req, res, next) => {
-  const user =await users.findById(req.params.id);
+  const user = await users.findById(req.params.id);
 
   if (!user) {
     return next(new errorHandler(`user doesnt exist with id:${req.params.id}`));
@@ -219,7 +217,7 @@ const updateUserRole = catchAsyncError(async (req, res, next) => {
   const newUserDeta = {
     name: req.body.name,
     email: req.body.email,
-    role: req.body.role
+    role: req.body.role,
     //avatar
   };
   // will add cloudinary later
@@ -232,25 +230,21 @@ const updateUserRole = catchAsyncError(async (req, res, next) => {
   await user.save();
   res
     .status(200)
-    .json({ success: true, message: "Profile updated successfuly",user });
+    .json({ success: true, message: "Profile updated successfuly", user });
 });
-
 
 // delete any user ---admin
 
 const deleteUser = catchAsyncError(async (req, res, next) => {
-  
-  const user= await users.findById(req.params.id)
-  if(!user){
-    return next(new errorHandler(`User not found with id: ${req.params.id}`,400))
+  const user = await users.findById(req.params.id);
+  if (!user) {
+    return next(
+      new errorHandler(`User not found with id: ${req.params.id}`, 400)
+    );
   }
   await user.remove();
-  res
-    .status(200)
-    .json({ success: true, message: "user deleted successfuly" });
+  res.status(200).json({ success: true, message: "user deleted successfuly" });
 });
-
-
 
 module.exports = {
   registerUser,
@@ -264,6 +258,5 @@ module.exports = {
   getAllUsers,
   SingleUserDetails,
   updateUserRole,
-  deleteUser
-
+  deleteUser,
 };

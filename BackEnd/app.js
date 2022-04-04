@@ -5,10 +5,16 @@ const bodyparser = require("body-parser");
 const errorMiddleware= require("./middlewares/error.js")
 const cookieParser= require('cookie-parser')
 const fileupload= require('express-fileupload')
+const path= require('path')
 
 
 
-require('dotenv').config({path:__dirname+ '/config/.env'});
+// require('dotenv').config({path:__dirname+ '/config/.env'});
+
+if(process.env.NODE_ENV !=='PRODUCTION') {
+    require("dotenv").config({ path: __dirname + "/config/.env" });
+    
+    }
 //middlewares
 
 app.use(bodyparser.json());
@@ -26,6 +32,12 @@ app.use("/",userRouter);
 app.use("/",productRouter);
 app.use("/",orderRouter);
 app.use("/",paymentRouter);
+
+app.use(express.static(path.join(__dirname,"../frontend/build")))
+
+app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,"../frontend/build/index.html"))
+})
 
 app.use(errorMiddleware)
 

@@ -1,6 +1,10 @@
 const app = require("./app.js");
 const path= require('path')
-require('dotenv').config({path:__dirname+ '/config/.env'});
+
+if(process.env.NODE_ENV !=='PRODUCTION') {
+  require("dotenv").config({ path: __dirname + "/config/.env" });
+  
+  }
 const port = process.env.PORT || 8080;
 const cloudinary= require('cloudinary')
 
@@ -9,8 +13,8 @@ const cloudinary= require('cloudinary')
 // uncaught error handling
 
 process.on("uncaughtException",(err)=>{
-    console.log(`Error: ${err.message}`);
-    console.log("Sutting down the server due to uncaught exception");
+    // console.log(`Error: ${err.message}`);
+    // console.log("Sutting down the server due to uncaught exception");
    
         process.exit(1);
     

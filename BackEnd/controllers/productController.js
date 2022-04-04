@@ -37,7 +37,7 @@ const getProductDetail = catchAsyncError(async (req, res, next) => {
     return next(new errorHandler("product not found", 404));
     // res.status(500).json({success:false, message:"product not found"})
   }
-  console.log(product)
+
   res.status(200).json({ success: true, product });
 });
 
@@ -49,10 +49,7 @@ const createProduct = catchAsyncError(async (req, res, next) => {
 
   req.body.createdBy= req.user.id;
   // req.body.numberOfReviews= req.body.reviews.length
-  console.log("reviews 12",req.body.reviews.length)
   let product = await productModel.create(req.body);
-  console.log("product",res.cookies)
-  console.log("created");
   res.status(201).json({ success: true, product });
 });
 
